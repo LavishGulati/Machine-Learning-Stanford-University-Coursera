@@ -108,6 +108,17 @@ Theta1_grad = (DEL2')*A1;
 Theta1_grad = Theta1_grad./m; 
 Theta2_grad = (DEL3')*A2;
 Theta2_grad = Theta2_grad./m;
+
+Theta1_reg = Theta1;
+Theta1_reg = Theta1_reg(:, 2:end);
+Theta1_reg = [zeros(size(Theta1_reg, 1), 1) Theta1_reg];
+
+Theta2_reg = Theta2;
+Theta2_reg = Theta2_reg(:, 2:end);
+Theta2_reg = [zeros(size(Theta2_reg, 1), 1) Theta2_reg];
+
+Theta1_grad = Theta1_grad + (lambda.*Theta1_reg)./m;
+Theta2_grad = Theta2_grad + (lambda.*Theta2_reg)./m;
 % =========================================================================
 
 % Unroll gradients
